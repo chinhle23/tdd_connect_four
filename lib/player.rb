@@ -1,0 +1,10 @@
+# This stores data about the game player
+class Player
+  attr_accessor :mark
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+    @mark = ''
+  end
+end

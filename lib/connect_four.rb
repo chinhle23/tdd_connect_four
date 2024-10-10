@@ -42,5 +42,24 @@ class ConnectFour
     drop_piece(column_input.to_i, @current_piece)
     @current_piece = @current_piece == '☑' ? '☒' : '☑'
   end
+
+  def horizontal_win?(piece)
+    @board.any? { 
+      |row| row[0..3].all? { |item| item == piece } || row[1..4].all? { |item| item == piece } || row[2..5].all? { |item| item == piece } || row[3..6].all? { |item| item == piece } 
+    }
+  end
+
+  def vertical_win?(piece)
+    for i in 0..6
+      column = []
+
+      for j in 0..5
+        column << @board[j][i]
+      end
+      
+      return true if column[0..3].all? { |item| item == piece } || column[1..4].all? { |item| item == piece } || column[2..5].all? { |item| item == piece } 
+    end
+    false   
+  end
 end
   

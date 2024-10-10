@@ -173,4 +173,122 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#horizontal_win?' do
+    context 'when user places 4 consective matching pieces in row 1' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☑'],
+            ['☒', '☒', '☒', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'returns a horizontal win' do
+        expect(game.horizontal_win?('☒')).to be true
+      end
+    end
+
+    context 'when user places 4 consective matching pieces in row 2' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☒', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☒', '☒', '☐', '☑', '☑', '☑', '☑'],
+            ['☒', '☒', '☐', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'returns a horizontal win' do
+        expect(game.horizontal_win?('☑')).to be true
+      end
+    end
+
+    context 'when user places 3 consective matching pieces in row 2' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☒', '☐', '☐', '☐', '☐', '☐', '☑'],
+            ['☒', '☒', '☐', '☒', '☑', '☑', '☑'],
+            ['☒', '☒', '☐', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'does not return a horizontal win' do
+        expect(game.horizontal_win?('☑')).to be false
+      end
+    end
+  end
+
+  describe '#vertical_win?' do
+    context 'when user places 4 consective matching pieces in column 1' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☒', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☒', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☒', '☐', '☐', '☐', '☐', '☐', '☑'],
+            ['☒', '☐', '☐', '☐', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'returns a vertical win' do
+        expect(game.vertical_win?('☒')).to be true
+      end
+    end
+
+    context 'when user places 4 consective matching pieces in column 2' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☑', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☑', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☑', '☐', '☐', '☐', '☐', '☐'],
+            ['☒', '☑', '☐', '☐', '☐', '☐', '☐'],
+            ['☒', '☒', '☐', '☒', '☒', '☒', '☑'],
+            ['☒', '☒', '☐', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'returns a vertical win' do
+        expect(game.vertical_win?('☑')).to be true
+      end
+    end
+
+    context 'when user places 3 consective matching pieces in column 2' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☑', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☑', '☐', '☐', '☐', '☐', '☐'],
+            ['☒', '☑', '☐', '☐', '☐', '☐', '☑'],
+            ['☒', '☒', '☐', '☒', '☒', '☒', '☑'],
+            ['☒', '☒', '☐', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'does not return a vertical win' do
+        expect(game.vertical_win?('☑')).to be false
+      end
+    end
+  end
 end

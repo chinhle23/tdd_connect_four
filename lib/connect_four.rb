@@ -87,5 +87,13 @@ class ConnectFour
 
     diagonal_down.any? { |row| row[0..3].all? { |item| item == piece } || row[1..4].all? { |item| item == piece } || row[2..5].all? { |item| item == piece  } }
   end
+
+  def check_for_winner
+    if horizontal_win?('☑') || vertical_win?('☑') || diagonal_up_win?('☑') || diagonal_down_win?('☑')
+      puts "\n☑ Connected Four!"
+    elsif horizontal_win?('☒') || vertical_win?('☒') || diagonal_up_win?('☒') || diagonal_down_win?('☒')
+      puts "\n☒ Connected Four!"
+    end
+  end
 end
   

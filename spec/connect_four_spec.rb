@@ -409,4 +409,102 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#check_for_winner' do
+    context 'when ☑ wins horizontally' do
+      before do
+        allow(game).to receive(:horizontal_win?).with('☒').and_return(false)
+        allow(game).to receive(:horizontal_win?).with('☑').and_return(true)
+      end
+
+      it 'displays ☑ winner text' do
+        expect(game).to receive(:puts).with("\n☑ Connected Four!")
+        game.check_for_winner
+      end
+    end
+
+    context 'when ☒ wins horizontally' do
+      before do
+        allow(game).to receive(:horizontal_win?).with('☑').and_return(false)
+        allow(game).to receive(:horizontal_win?).with('☒').and_return(true)
+      end
+
+      it 'displays ☒ winner text' do
+        expect(game).to receive(:puts).with("\n☒ Connected Four!")
+        game.check_for_winner
+      end
+    end
+
+    context 'when ☑ wins vertically' do
+      before do
+        allow(game).to receive(:vertical_win?).with('☒').and_return(false)
+        allow(game).to receive(:vertical_win?).with('☑').and_return(true)
+      end
+
+      it 'displays ☑ winner text' do
+        expect(game).to receive(:puts).with("\n☑ Connected Four!")
+        game.check_for_winner
+      end
+    end
+
+    context 'when ☒ wins vertically' do
+      before do
+        allow(game).to receive(:vertical_win?).with('☒').and_return(true)
+        allow(game).to receive(:vertical_win?).with('☑').and_return(false)
+      end
+
+      it 'displays ☒ winner text' do
+        expect(game).to receive(:puts).with("\n☒ Connected Four!")
+        game.check_for_winner
+      end
+    end
+
+    context 'when ☑ wins diagonally up' do
+      before do
+        allow(game).to receive(:diagonal_up_win?).with('☒').and_return(false)
+        allow(game).to receive(:diagonal_up_win?).with('☑').and_return(true)
+      end
+
+      it 'displays ☑ winner text' do
+        expect(game).to receive(:puts).with("\n☑ Connected Four!")
+        game.check_for_winner
+      end
+    end
+
+    context 'when ☒ wins diagonally up' do
+      before do
+        allow(game).to receive(:diagonal_up_win?).with('☒').and_return(true)
+        allow(game).to receive(:diagonal_up_win?).with('☑').and_return(false)
+      end
+
+      it 'displays ☒ winner text' do
+        expect(game).to receive(:puts).with("\n☒ Connected Four!")
+        game.check_for_winner
+      end
+    end
+
+    context 'when ☑ wins diagonally down' do
+      before do
+        allow(game).to receive(:diagonal_down_win?).with('☒').and_return(false)
+        allow(game).to receive(:diagonal_down_win?).with('☑').and_return(true)
+      end
+
+      it 'displays ☑ winner text' do
+        expect(game).to receive(:puts).with("\n☑ Connected Four!")
+        game.check_for_winner
+      end
+    end
+
+    context 'when ☒ wins diagonally down' do
+      before do
+        allow(game).to receive(:diagonal_down_win?).with('☒').and_return(true)
+        allow(game).to receive(:diagonal_down_win?).with('☑').and_return(false)
+      end
+
+      it 'displays ☒ winner text' do
+        expect(game).to receive(:puts).with("\n☒ Connected Four!")
+        game.check_for_winner
+      end
+    end
+  end
 end

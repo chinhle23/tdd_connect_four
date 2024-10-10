@@ -291,4 +291,122 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#diagonal_up_win?' do
+    context 'when user places 4 consective matching pieces in diagonal up 1' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☒', '☐', '☐', '☐'],
+            ['☐', '☐', '☒', '☑', '☐', '☐', '☐'],
+            ['☐', '☒', '☑', '☒', '☐', '☐', '☐'],
+            ['☒', '☑', '☒', '☑', '☐', '☐', '☐'],
+            ['☒', '☑', '☑', '☑', '☐', '☐', '☐'],
+            ['☒', '☑', '☒', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'returns a diagonal up win' do
+        expect(game.diagonal_up_win?('☒')).to be true
+      end
+    end
+
+    context 'when user places 4 consective matching pieces in diagonal up 2' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☐', '☑', '☐', '☐'],
+            ['☐', '☑', '☐', '☑', '☑', '☐', '☐'],
+            ['☐', '☑', '☑', '☑', '☒', '☐', '☐'],
+            ['☒', '☑', '☒', '☒', '☒', '☐', '☐'],
+            ['☒', '☒', '☑', '☒', '☒', '☒', '☐'],
+            ['☒', '☒', '☑', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'returns a diagonal up win' do
+        expect(game.diagonal_up_win?('☑')).to be true
+      end
+    end
+
+    context 'when user places 3 consective matching pieces in diagonal up 2' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☑', '☐', '☑', '☑', '☐', '☐'],
+            ['☐', '☑', '☑', '☑', '☒', '☐', '☐'],
+            ['☒', '☑', '☒', '☒', '☒', '☐', '☐'],
+            ['☒', '☒', '☑', '☒', '☒', '☒', '☐'],
+            ['☒', '☒', '☑', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'does not return a diagonal up win' do
+        expect(game.diagonal_up_win?('☑')).to be false
+      end
+    end
+  end
+
+  describe '#diagonal_down_win?' do
+    context 'when user places 4 consective matching pieces in diagonal down 2' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☑', '☐', '☐', '☐'],
+            ['☒', '☐', '☒', '☑', '☐', '☐', '☐'],
+            ['☑', '☒', '☑', '☒', '☐', '☐', '☐'],
+            ['☒', '☑', '☒', '☑', '☐', '☐', '☐'],
+            ['☒', '☑', '☑', '☒', '☒', '☐', '☐'],
+            ['☒', '☑', '☒', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'returns a diagonal down win' do
+        expect(game.diagonal_down_win?('☒')).to be true
+      end
+    end
+
+    context 'when user places 4 consective matching pieces in diagonal down 3' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☑', '☐', '☐', '☐', '☒', '☐', '☐'],
+            ['☑', '☑', '☐', '☒', '☑', '☐', '☐'],
+            ['☑', '☑', '☑', '☑', '☒', '☒', '☐'],
+            ['☒', '☑', '☒', '☑', '☒', '☒', '☐'],
+            ['☒', '☒', '☑', '☒', '☒', '☒', '☐'],
+            ['☒', '☒', '☑', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'returns a diagonal down win' do
+        expect(game.diagonal_down_win?('☑')).to be true
+      end
+    end
+
+    context 'when user places 3 consective matching pieces in diagonal down 3' do
+      subject(:game) {
+        described_class.new(
+          [
+            ['☐', '☐', '☐', '☐', '☐', '☐', '☐'],
+            ['☐', '☑', '☐', '☑', '☑', '☐', '☐'],
+            ['☐', '☑', '☑', '☑', '☒', '☐', '☐'],
+            ['☒', '☑', '☒', '☑', '☒', '☒', '☐'],
+            ['☒', '☒', '☑', '☒', '☒', '☒', '☐'],
+            ['☒', '☒', '☑', '☒', '☑', '☑', '☑']
+          ]
+        )
+      }
+
+      it 'does not return a diagonal down win' do
+        expect(game.diagonal_down_win?('☑')).to be false
+      end
+    end
+  end
 end

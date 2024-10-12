@@ -91,8 +91,21 @@ class ConnectFour
   def check_for_winner
     if horizontal_win?('☑') || vertical_win?('☑') || diagonal_up_win?('☑') || diagonal_down_win?('☑')
       puts "\n☑ Connected Four!"
+      return true
     elsif horizontal_win?('☒') || vertical_win?('☒') || diagonal_up_win?('☒') || diagonal_down_win?('☒')
       puts "\n☒ Connected Four!"
+      return true
+    end
+  end
+
+  def play
+    display
+    read_input
+    if check_for_winner
+      display
+      puts 'Game Over!'
+    else
+      play
     end
   end
 end

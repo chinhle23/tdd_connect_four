@@ -412,26 +412,33 @@ describe ConnectFour do
 
   describe '#check_for_winner' do
     context 'when ☑ wins horizontally' do
+      subject(:game_check_mark_horizontal) { described_class.new }
       before do
-        allow(game).to receive(:horizontal_win?).with('☒').and_return(false)
-        allow(game).to receive(:horizontal_win?).with('☑').and_return(true)
+        allow(game_check_mark_horizontal).to receive(:horizontal_win?).with('☒').and_return(false)
+        allow(game_check_mark_horizontal).to receive(:horizontal_win?).with('☑').and_return(true)
       end
 
       it 'displays ☑ winner text' do
-        expect(game).to receive(:puts).with("\n☑ Connected Four!")
-        game.check_for_winner
+        expect(game_check_mark_horizontal).to receive(:puts).with("\n☑ Connected Four!")
+        game_check_mark_horizontal.check_for_winner
       end
+
+      # it 'exits the game' do
+      #   expect(game).to receive(:exit)
+      #   game.check_for_winner
+      # end
     end
 
     context 'when ☒ wins horizontally' do
+      subject(:game_x_mark_horizontal) { described_class.new }
       before do
-        allow(game).to receive(:horizontal_win?).with('☑').and_return(false)
-        allow(game).to receive(:horizontal_win?).with('☒').and_return(true)
+        allow(game_x_mark_horizontal).to receive(:horizontal_win?).with('☑').and_return(false)
+        allow(game_x_mark_horizontal).to receive(:horizontal_win?).with('☒').and_return(true)
       end
 
       it 'displays ☒ winner text' do
-        expect(game).to receive(:puts).with("\n☒ Connected Four!")
-        game.check_for_winner
+        expect(game_x_mark_horizontal).to receive(:puts).with("\n☒ Connected Four!")
+        game_x_mark_horizontal.check_for_winner
       end
     end
 
@@ -504,6 +511,29 @@ describe ConnectFour do
       it 'displays ☒ winner text' do
         expect(game).to receive(:puts).with("\n☒ Connected Four!")
         game.check_for_winner
+      end
+    end
+  end
+
+  describe '#play' do
+    before do
+      allow(game).to receive(:check_for_winner).and_return(true)
+    end
+
+    context 'when the game starts' do
+      it 'calls display' do
+        expect(game).to receive(:display).twice
+        game.play
+      end
+
+      it 'calls read_input' do
+        expect(game).to receive(:read_input)
+        game.play
+      end
+
+      it 'calls check_for_winner' do
+        expect(game).to receive(:check_for_winner)
+        game.play
       end
     end
   end
